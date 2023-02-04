@@ -93,15 +93,23 @@ public class MathService {
     }
 
     private static void checkExpressionIsCorrect(String expression) {
-        if (expression == null || expression.chars().allMatch(Character::isWhitespace)) {
+        String expressionWithoutWhitespace = expression.replaceAll(" ", "");
+        if (expression == null || expressionWithoutWhitespace.chars().allMatch(Character::isWhitespace)) {
             throw new InvalidEquationFormatException("Expression can't be null or empty");
         }
-        if (!expression.matches("^[0-9+\\-*/()]+$")) {
+        if (expressionWithoutWhitespace.chars().boxed().anyMatch(c -> (c == OperationImpl.ADD.symbol
+                || c == OperationImpl.SUBTRACT.symbol|| c == OperationImpl.MULTIPLY.symbol  || c == OperationImpl.DIVIDE.symbol)
+                && expressionWithoutWhitespace.indexOf(c) + 1 < expressionWithoutWhitespace.length()
+                && expressionWithoutWhitespace.charAt(expressionWithoutWhitespace.indexOf(c) + 1) == c)) {
+            throw new InvalidEquationFormatException("Two operators can't stand next to each other");
+        }
+        if (!expressionWithoutWhitespace.matches("^[0-9+\\-*/()_.]+$")) {
             throw new UnknownOperatorException("Equation must include only +, -, *, /");
         }
-        if (Character.isDigit(expression.charAt(0)) || expression.charAt(0) == OperationImpl.SUBTRACT.symbol) {
+        if (Character.isDigit(expressionWithoutWhitespace.charAt(0)) || expressionWithoutWhitespace.charAt(0) == OperationImpl.SUBTRACT.symbol) {
             return;
         } throw new InvalidEquationFormatException("Equation must start with a number");
+
     }
 
     public static boolean orderOfOperations ( char op1, char op2){
