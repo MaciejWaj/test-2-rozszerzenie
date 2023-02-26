@@ -1,13 +1,13 @@
-package pl.kurs.test2rozszerzenie.service;
+package pl.kurs.test2rozszerzenie.operation;
 
 import pl.kurs.test2rozszerzenie.exception.UnknownOperatorException;
 
 import java.util.Arrays;
 
 
-public enum OperationImpl implements Operation{
+public enum MathOperators implements MathOperation  {
     ADD('+') {
-        @Override
+
         public double operation(double a, double b) {
             return a + b;
         }
@@ -33,13 +33,13 @@ public enum OperationImpl implements Operation{
 
     public final char symbol;
 
-    OperationImpl(char symbol) {
+    MathOperators(char symbol) {
         this.symbol = symbol;
     }
 
 
-    public static OperationImpl getOperator(char symbol) {
-        for (OperationImpl op : values()) {
+    public static MathOperators getOperator(char symbol) {
+        for (MathOperators op : values()) {
             if (op.symbol == symbol) {
                 return op;
             }
@@ -50,7 +50,4 @@ public enum OperationImpl implements Operation{
     public static boolean isOperator(char operator) {
         return Arrays.stream(values()).anyMatch(o -> o.symbol == operator);
     }
-
-
-
 }

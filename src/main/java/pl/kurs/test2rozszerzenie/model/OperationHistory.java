@@ -1,7 +1,6 @@
-package pl.kurs.test2rozszerzenie.repository;
-import java.io.Serializable;
+package pl.kurs.test2rozszerzenie.model;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @Entity
@@ -12,13 +11,12 @@ public class OperationHistory {
     @Column(name = "id_operation")
     private Long id;
     @Column(name = "date")
-    private LocalDate localDate;
+    private LocalDateTime localDateTime;
     private String expression;
     private double result;
 
     public OperationHistory() {
     }
-
 
     public Long getId() {
         return id;
@@ -28,12 +26,12 @@ public class OperationHistory {
         this.id = id;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public String getExpression() {
@@ -53,7 +51,7 @@ public class OperationHistory {
     }
 
     public OperationHistory(LocalDate localDate, String expression, double result) {
-        this.localDate = localDate;
+        this.localDateTime = localDateTime;
         this.expression = expression;
         this.result = result;
     }

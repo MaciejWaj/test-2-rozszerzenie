@@ -1,27 +1,26 @@
 package pl.kurs.test2rozszerzenie;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.event.EventListener;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import pl.kurs.test2rozszerzenie.service.MathService;
+import org.springframework.context.ConfigurableApplicationContext;
+import pl.kurs.test2rozszerzenie.datainputprovider.ConsoleEquationProvider;
+import pl.kurs.test2rozszerzenie.execution.Execution;
 
 
 
 @SpringBootApplication
 public class Test2RozszerzenieApplication {
-    @Autowired
-    private MathService service;
-
     public static void main(String[] args) {
-        SpringApplication.run(Test2RozszerzenieApplication.class, args);
-    }
+        ConfigurableApplicationContext ctx = SpringApplication.run(Test2RozszerzenieApplication.class, args);
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void doAfterStartUp() {
-        service.run();
+        Execution execution = ctx.getBean(Execution.class);
+
+
+        ConsoleEquationProvider consoleEquationProvider = new ConsoleEquationProvider();
+
+        double result = execution.evaluateAndSave(consoleEquationProvider.getData());
+        System.out.println(result);
+
     }
 }

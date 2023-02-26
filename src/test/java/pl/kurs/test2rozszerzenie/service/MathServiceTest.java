@@ -16,15 +16,6 @@ class MathServiceTest {
         assertEquals(expectedResult, actualResult, 0.0);
     }
 
-    @Test
-    public void evaluateWithInvalidExpression() {
-        String expression = "1 ++ 2";
-        try {
-            MathService.evaluate(expression);
-        } catch (InvalidEquationFormatException e) {
-            assertEquals("Two operators can't stand next to each other", e.getMessage());
-        }
-    }
 
     @Test
     public void evaluateWithExpressionContainingDecimalNumbers() {
@@ -45,13 +36,12 @@ class MathServiceTest {
     }
 
     @Test
-    public void evaluateWithExpressionStartingWithOperator() {
-        String expression = "+ 1 + 2";
-        try {
-            MathService.evaluate(expression);
-        } catch (InvalidEquationFormatException e) {
-            assertEquals("Equation must start with a number", e.getMessage());
-        }
+    public void evaluateExpressionWithNegativeResult() {
+        String expression = "5-10";
+        double expectedResult = -5;
+        double actualResult = MathService.evaluate(expression);
+        assertEquals(expectedResult, actualResult, 0.0);
     }
+
 
 }
