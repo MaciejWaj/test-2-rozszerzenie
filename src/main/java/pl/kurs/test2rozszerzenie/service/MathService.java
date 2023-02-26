@@ -61,7 +61,7 @@ public class MathService {
                 (op2 != MathOperators.ADD.symbol && op2 != MathOperators.SUBTRACT.symbol);
     }
 
-    public static double applyOperation ( char op, double b, double a) throws UnknownOperatorException {
+    public static double applyOperation ( char op, double b, double a) throws ArithmeticException {
         if (a == 0 && op == MathOperators.DIVIDE.symbol || b == 0 && op == MathOperators.DIVIDE.symbol) {
             throw new ArithmeticException("Division by zero is not allowed");
         }
