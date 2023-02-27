@@ -4,6 +4,7 @@ package pl.kurs.test2rozszerzenie;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import pl.kurs.test2rozszerzenie.datainputprovider.CheckInputEquation;
 import pl.kurs.test2rozszerzenie.datainputprovider.ConsoleEquationProvider;
 import pl.kurs.test2rozszerzenie.execution.Execution;
 
@@ -24,6 +25,7 @@ public class Test2RozszerzenieApplication {
             if(equation.equalsIgnoreCase(end)) {
                 break;
             } else {
+                CheckInputEquation.checkExpressionIsCorrect(equation);
                 double result = execution.evaluateAndSave(equation);
                 System.out.println(result);
             }
