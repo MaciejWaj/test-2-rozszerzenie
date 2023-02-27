@@ -1,7 +1,6 @@
 package pl.kurs.test2rozszerzenie.service;
 
 import org.springframework.stereotype.Service;
-import pl.kurs.test2rozszerzenie.exception.UnknownOperatorException;
 import pl.kurs.test2rozszerzenie.operation.MathOperators;
 
 import java.util.*;

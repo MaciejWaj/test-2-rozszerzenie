@@ -16,11 +16,18 @@ public class Test2RozszerzenieApplication {
 
         Execution execution = ctx.getBean(Execution.class);
 
-
         ConsoleEquationProvider consoleEquationProvider = new ConsoleEquationProvider();
 
-        double result = execution.evaluateAndSave(consoleEquationProvider.getData());
-        System.out.println(result);
-
+        String end = "x";
+        while(true) {
+            String equation = consoleEquationProvider.getData();
+            if(equation.equalsIgnoreCase(end)) {
+                break;
+            } else {
+                double result = execution.evaluateAndSave(equation);
+                System.out.println(result);
+            }
+        }
+        ctx.close();
     }
 }

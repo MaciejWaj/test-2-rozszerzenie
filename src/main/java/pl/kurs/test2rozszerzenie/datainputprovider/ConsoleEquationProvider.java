@@ -6,16 +6,15 @@ import java.util.Scanner;
 
 public class ConsoleEquationProvider implements InputEquationProvider {
 
+        Scanner scanner = new Scanner(System.in);
     
     @Override
     public String getData() {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("To close calculator press x");
         System.out.println("state the equation");
         String equation = scanner.nextLine();
         String equationWithoutWhitespace = equation.replaceAll(" ", "");
         CheckInputEquation.checkExpressionIsCorrect(equation);
         return equationWithoutWhitespace;
     }
-
-
 }
